@@ -1,4 +1,4 @@
-machine:
+ machine:
   ruby:
     version: rbx-2.2.6
 
@@ -7,13 +7,10 @@ general:
      - $CIRCLE_TEST_REPORTS
      - target
      
-dependencies:
-    override:
-     - mvn install -DskipTests
-
- test:
-    override:
-     - mvn clean install -DskipTests
-    post:
-     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
-     - find . -type f -regex ".*/target/failsafe-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+test:
+  override:
+    - mvn clean install
+  post:
+    - mkdir -p $CIRCLE_TEST_REPORTS/junit/
+    - find . -type f -regex ".*/target/failsafe-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
+    
