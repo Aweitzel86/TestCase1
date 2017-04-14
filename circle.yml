@@ -11,7 +11,9 @@ dependencies:
     override:
      - mvn install -DskipTests
 
-test:
+ test:
+  override:
+    - mvn clean install -DskipTests
   post:
     - mkdir -p $CIRCLE_TEST_REPORTS/junit/
     - find . -type f -regex ".*/target/failsafe-reports/.*xml" -exec cp {} $CIRCLE_TEST_REPORTS/junit/ \;
